@@ -15,13 +15,15 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create('it_IT');
+        $faker = Faker::create('id_ID');
         // column: username, name, email, password, department_id, role
 
         for ($i=0; $i < 50; $i++) { 
             DB::table('users')->insert([
                 'username' => $faker->username,
-                'name' => $faker->name,
+                // 'name' => $faker->name,
+                'firstname' => $faker->firstname,
+                'lastname' => $faker->lastname,
                 'email' => $faker->email,
                 'password' => Hash::make('password'),
                 'department_id' => $faker->randomElement([1, 2, 3]),
