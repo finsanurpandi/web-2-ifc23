@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lecturer extends Model
 {
-    //
+    protected $fillable = [
+        'nidn',
+        'address',
+        'user_id'
+    ];
 }
