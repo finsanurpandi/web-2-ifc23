@@ -8,12 +8,22 @@ use App\Models\Lecturer;
 use App\Models\Department;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreLecturerRequest;
+use App\Mail\TestMail;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $data['users'] = User::query()->with('department')->paginate(20);
+        // withTrashed() menyertakan dengan data yang sudah dihapus.
+        // onlyTrashed() hanya menampilkan data yang sudah dihapus saja.
+        // methode restore() untuk mengembalikan data ke data utama, atau mengembalikan nilai deleted at menjadi null
+        // methode forceDelete() untuk menghapus data dari database sehingga data benar-benar hilang.
+
+        $data['users'] = User::withTrashed()->with('department')->paginate(20);
+
+        // send email
+        Mail::to('sdvhsvhs@sdbvbds.com')->send(new TestMail());
         
         return view('user', $data);
     }
